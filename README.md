@@ -2,7 +2,7 @@
 Adaptive HTML5 Video Player for Rails
 
 ## Usage
-Anywhere in your views you can now easily embed a Bitmovin-Player:
+After installation you can embed a Bitmovin-Player anywhere in your views as simple as this:
 
 ```ruby
 <%= bitmovin_player(
@@ -30,8 +30,15 @@ Now run the generator and follow the instructions
 $ rails generate bitmovin_player
 ```
 
-## Contributing
+## Configuration
+
+Bitmovin-Player-Rails supports all settings Bitmovin-Player supports.
+Please look at the [documentation](https://bitmovin.com/player-documentation/) and just translate the JavaScript config to Ruby hashes and you are good to go.
+
+## Need Help?
 If you find a bug or need some help don't hesitate to raise an Issue here on GitHub or [contact us](https://bitmovin.com/contact/)
+
+## Contributing
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
