@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    bitmovin-player-rails (6.0.0)
+    bitmovin-player-rails (1.0.0)
       httparty
       rails (~> 5.0.0, >= 5.0.0.1)
 
