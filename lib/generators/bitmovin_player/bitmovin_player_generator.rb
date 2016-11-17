@@ -15,13 +15,13 @@ class BitmovinPlayerGenerator < Rails::Generators::Base
 
 		puts "Available Player versions:"
 		default_versions.each_with_index do |version, index|
-			puts "#{index}) [#{version["category"]}] #{version["version"]}"
+			puts "#{index + 1}) [#{version["category"]}] #{version["version"]}"
 		end
 		default = default_versions.last
 
-		player_index = ask("What player version do you want to install? (#{default_versions.length - 1}):")
-		player_index = default_versions.length - 1 if (player_index.blank?) 
-		selected_version = default_versions[player_index.to_i]
+		player_index = ask("What player version do you want to install? (#{default_versions.length}):")
+		player_index = default_versions.length if (player_index.blank?) 
+		selected_version = default_versions[player_index.to_i - 1]
 
 		puts "Installing Player `#{selected_version["version"]}`"
 
