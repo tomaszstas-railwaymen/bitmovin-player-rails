@@ -1,18 +1,36 @@
+require 'pry-rails'
 module Bitmovin::Player::Rails
 	module Helper
 		def bitmovin_player_script
 			javascript_include_tag Rails.configuration.bitmovin_player["cdn_url"]
 		end
 
-		def bitmovin_player(options = {})
+		def bitmovin_player(options={})
+			container = options.delete(:container) || "bitmovin-#{SecureRandom.hex[0...5]}"
+			width = options.delete(:width)
+			height = options.delete(:height)
+			options[:style] = options[:style] || {}
+			options[:style][:width] = width unless width.nil?
+			options[:style][:height] = height unless height.nil?
+
+
+			options[:source] = options[:source] || {}
+			options[:source][:dash] = options[:source][:dash] || options.delete(:dash) if (options[:source][:dash] || options[:dash])
+			options[:source][:hls] = options[:source][:hls] || options.delete(:hls) if (options[:source][:hls] || options[:hls])
+			options[:source][:progressive] = options[:source][:progressive] || options.delete(:progressive) if (options[:source][:progressive] || options[:progressive])
+			options[:source][:poster] = options[:source][:poster] || options.delete(:poster) if (options[:source][:poster] || options[:poster])
+
+			version = Rails.configuration.bitmovin_player["version"]
+			setup = "bitmovin.player"
+			setup = "bitdash" if version.include?("5")
+
+			options[:key] = Rails.configuration.bitmovin_player["license_key"]
+
 			result = <<-EOS
-<div id="player"></div>
+<div id="#{container}"></div>
 <script type="text/javascript">
-		var conf = {
-				key: "#{Rails.configuration.bitmovin_player["license_key"]}}",
-				source: #{options.to_json}
-		};
-		var player = bitmovin.player("player");
+		var conf = #{JSON.pretty_generate(options)};
+		var player = #{setup}("#{container}");
 		player.setup(conf).then(function(value) {
 				// Success
 				console.log("Successfully created bitmovin player instance");

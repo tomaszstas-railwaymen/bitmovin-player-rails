@@ -27,8 +27,13 @@ class BitmovinPlayerGenerator < Rails::Generators::Base
 
 		@cdn_url = selected_version["cdnUrl"]
 		@license_key = get_license_key
+		@version = selected_version["version"]
 		template "config.yml.erb", "config/bitmovin_player.yml"
 		application "config.bitmovin_player = config_for(:bitmovin_player)"
+
+		inject_into_file 'app/views/layouts/application.html.erb', :after => 'javascript_include_tag' do
+			"<%= bitmovin_player_script %>"
+		end
 
 		puts "Installation successful!"
 		readme File.expand_path('.././INSTRUCTIONS', __FILE__)
