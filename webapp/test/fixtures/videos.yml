@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dash: MyString
+  hls: MyString
+  progressive: MyString
+  name: MyString
+
+two:
+  dash: MyString
+  hls: MyString
+  progressive: MyString
+  name: MyString

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Dash:</strong>
+  <%= @video.dash %>
+</p>
+
+<p>
+  <strong>Hls:</strong>
+  <%= @video.hls %>
+</p>
+
+<p>
+  <strong>Progressive:</strong>
+  <%= @video.progressive %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @video.name %>
+</p>
+
+<%= link_to 'Edit', edit_video_path(@video) %> |
+<%= link_to 'Back', videos_path %>
