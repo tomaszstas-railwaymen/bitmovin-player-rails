@@ -5,7 +5,7 @@ class BitmovinPlayerGenerator < Rails::Generators::NamedBase
 
 	def install
 		readme File.expand_path('.././README', __FILE__)
-		@api_key = ask('Please enter your Bitmovin-Api-Key: ')
+		@api_key = ask('Please enter your Bitmovin-Api-Key:')
 
 		default_versions = fetch_player_versions
 
@@ -15,7 +15,7 @@ class BitmovinPlayerGenerator < Rails::Generators::NamedBase
 		end
 		default = default_versions.last
 
-		player_index = ask("What player version do you want to install? (#{default_versions.length - 1}): ")
+		player_index = ask("What player version do you want to install? (#{default_versions.length - 1}):")
 		player_index = default_versions.length - 1 if (player_index.blank?) 
 		selected_version = default_versions[player_index.to_i]
 
@@ -25,6 +25,9 @@ class BitmovinPlayerGenerator < Rails::Generators::NamedBase
 		@license_key = get_license_key
 		template "config.yml.erb", "config/bitmovin_player.yml"
 		application "config.bitmovin_player = config_for(:bitmovin_player)"
+
+		puts "Installation successful!"
+		readme File.expand_path('.././INSTRUCTIONS', __FILE__)
 	end
 
 	private
