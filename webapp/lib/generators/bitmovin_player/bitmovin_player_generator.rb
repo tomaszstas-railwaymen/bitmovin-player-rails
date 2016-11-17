@@ -21,11 +21,10 @@ class BitmovinPlayerGenerator < Rails::Generators::NamedBase
 
 		puts "Installing Player `#{selected_version["version"]}`"
 
-		application do 
-			"config.bitmovin_player.version = '#{selected_version["version"]}'"
-			"config.bitmovin_player.cdn_url = '#{selected_version["cdnUrl"]}'"
-			"config.bitmovin_player.license_key = '#{get_license_key}'"
-		end
+		@cdn_url = selected_version["cdnUrl"]
+		@license_key = get_license_key
+		template "config.yml.erb", "config/bitmovin_player.yml"
+		application "config.bitmovin_player = config_for(:bitmovin_player)"
 	end
 
 	private
