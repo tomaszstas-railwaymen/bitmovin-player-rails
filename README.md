@@ -39,6 +39,7 @@ Please look at the [documentation](https://bitmovin.com/player-documentation/) a
 If you find a bug or need some help don't hesitate to raise an Issue here on GitHub or [contact us](https://bitmovin.com/contact/)
 
 ## Contributing
+Feel free to send us pull requests or suggestions!
 
 ## License
 The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
