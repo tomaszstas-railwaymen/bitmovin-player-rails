@@ -1,5 +1,9 @@
 require 'httparty'
-class BitmovinPlayerGenerator < Rails::Generators::NamedBase
+require 'rails/generators/named_base'
+require 'rails/generators/base'
+
+class BitmovinPlayerGenerator < Rails::Generators::Base
+
   source_root File.expand_path('../templates', __FILE__)
 	@api_key
 
