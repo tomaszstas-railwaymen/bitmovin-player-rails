@@ -31,8 +31,8 @@ class BitmovinPlayerGenerator < Rails::Generators::Base
 		template "config.yml.erb", "config/bitmovin_player.yml"
 		application "config.bitmovin_player = config_for(:bitmovin_player)"
 
-		inject_into_file 'app/views/layouts/application.html.erb', :after => 'javascript_include_tag' do
-			"<%= bitmovin_player_script %>"
+		inject_into_file 'app/views/layouts/application.html.erb', :before => '</head>' do
+			"<%= bitmovin_player_script %>\n"
 		end
 
 		puts "Installation successful!"
