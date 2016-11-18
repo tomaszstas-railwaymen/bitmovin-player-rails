@@ -1,4 +1,3 @@
-require 'pry-rails'
 module Bitmovin::Player::Rails
 	module Helper
 		def bitmovin_player_script
