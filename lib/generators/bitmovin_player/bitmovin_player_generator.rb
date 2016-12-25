@@ -31,9 +31,17 @@ class BitmovinPlayerGenerator < Rails::Generators::Base
 		template "config.yml.erb", "config/bitmovin_player.yml"
 		application "config.bitmovin_player = config_for(:bitmovin_player)"
 
-		inject_into_file 'app/views/layouts/application.html.erb', :before => '</head>' do
-			"<%= bitmovin_player_script %>\n"
-		end
+    if (File.exists?('app/views/layouts/application.html.haml'))
+      inject_into_file 'app/views/layouts/application.html.haml', :before => '%body' do
+        "= bitmovin_player_script\n"
+      end
+      puts "Injected a script tag into your HAML Layout. Please make sure it is indented correctly."
+    end
+    if (File.exists?('app/views/layouts/application.html.erb'))
+      inject_into_file 'app/views/layouts/application.html.erb', :before => '</head>' do
+        "<%= bitmovin_player_script %>\n"
+      end
+    end
 
 		puts "Installation successful!"
 		readme File.expand_path('.././INSTRUCTIONS', __FILE__)
@@ -46,7 +54,7 @@ class BitmovinPlayerGenerator < Rails::Generators::Base
 		check_api_response!(response)
 		player_versions = JSON.parse(response.body)
 
-		default_versions = player_versions.select { |version| version["isDefault"] == true }
+		player_versions.select { |version| version["isDefault"] == true }
 	end
 
 	def check_api_response!(response)
